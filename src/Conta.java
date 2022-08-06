@@ -8,6 +8,7 @@ public abstract class Conta implements IConta {
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
+	protected double rendimento = 1;
 
 	public Conta(Cliente cliente) {
 		this.agencia = Conta.AGENCIA_PADRAO;
@@ -29,6 +30,20 @@ public abstract class Conta implements IConta {
 	public void transferir(double valor, IConta contaDestino) {
 		this.sacar(valor);
 		contaDestino.depositar(valor);
+	}
+	
+	@Override
+	public void render() {
+		saldo = saldo*rendimento;
+	}
+	
+	@Override
+	public void atualizarRendimento(double indice) {
+		rendimento = indice;
+	}
+	
+	public double getRendimento() {
+		return rendimento;
 	}
 
 	public int getAgencia() {
